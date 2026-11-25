@@ -32,11 +32,11 @@ formulario.addEventListener("submit", function(event) {
 
     event.preventDefault();
 
-    const nome = document.getElementById("nome").value;
-    const marca = document.getElementById("marca").value;
+    const nome = document.getElementById("nome").value.trim();
+    const marca = document.getElementById("marca").value.trim();
     const volume = document.getElementById("volume").value;
     const preco = document.getElementById("preco").value;
-    const descricao = document.getElementById("descricao").value;
+    const descricao = document.getElementById("descricao").value.trim();
     const fragrantica = document.getElementById("fragrantica").value.trim();
     const arquivo = document.getElementById("imagem").files[0];
 
@@ -105,7 +105,7 @@ function mostrarPerfumes(filtro = "") {
         imagem.title = "Clique para divulgar";
 
         imagem.addEventListener("click", function() {
-            copiarDivulgacao(perfume);
+            copiarDivulgacao(perfume.id);
         });
 
         // NOME
@@ -119,7 +119,7 @@ function mostrarPerfumes(filtro = "") {
         // PREÇO
         const preco = document.createElement("p");
 
-        preco.textContent = perfume.preco.toLocaleString("pt-BR", {
+        preco.textContent = Number(perfume.preco).toLocaleString("pt-BR", {
             style: "currency",
             currency: "BRL"
         });
@@ -176,16 +176,19 @@ function gerarDivulgacao(perfume, linkAmazon) {
         maximumFractionDigits: 2
     });
 
-    const linkFragrantica = perfume.fragrantica
-        ? `🔎 Fragrantica: ${perfume.fragrantica}`
-        : "";
+    const fragrantica = (perfume.fragrantica || "").trim();
+
+    let textoFragrantica = "";
+
+    if (fragrantica !== "") {
+        textoFragrantica = `🔎 ${fragrantica}\n`;
+    }
 
     return `*${perfume.nome} (${perfume.volume}ml)*
 
 -${perfume.descricao}
 
-${linkFragrantica}
-
+${textoFragrantica}
 📎${linkAmazon}
 💰R$${preco}!!!!!!!`;
 
@@ -196,7 +199,16 @@ ${linkFragrantica}
 // 7. COPIAR DIVULGAÇÃO
 // ===================================
 
-async function copiarDivulgacao(perfume) {
+async function copiarDivulgacao(id) {
+
+    const perfume = perfumes.find(function(item) {
+        return item.id === id;
+    });
+
+    if (!perfume) {
+        alert("Perfume não encontrado!");
+        return;
+    }
 
     const linkAmazon = prompt("Cole o link promocional da Amazon:");
 
@@ -228,7 +240,16 @@ async function copiarDivulgacao(perfume) {
 // 8. COMPARTILHAR DIVULGAÇÃO
 // ===================================
 
-async function compartilharPerfume(perfume) {
+async function compartilharPerfume(id) {
+
+    const perfume = perfumes.find(function(item) {
+        return item.id === id;
+    });
+
+    if (!perfume) {
+        alert("Perfume não encontrado!");
+        return;
+    }
 
     const linkAmazon = prompt("Cole o link promocional da Amazon:");
 
