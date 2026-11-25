@@ -98,6 +98,7 @@ function mostrarPerfumes(filtro = "") {
         const card = document.createElement("div");
         card.classList.add("card-perfume");
 
+        // Imagem
         const imagem = document.createElement("img");
         imagem.src = perfume.imagem;
         imagem.alt = perfume.nome;
@@ -107,18 +108,39 @@ function mostrarPerfumes(filtro = "") {
             copiarDivulgacao(perfume);
         });
 
+        // Nome
         const titulo = document.createElement("h3");
         titulo.textContent = perfume.nome;
 
+        // Marca
         const marca = document.createElement("p");
         marca.textContent = perfume.marca;
 
+        // Preço
         const preco = document.createElement("p");
         preco.textContent = perfume.preco.toLocaleString("pt-BR", {
             style: "currency",
             currency: "BRL"
         });
 
+        // Link do Fragrantica
+        const linkFragrantica = document.createElement("a");
+
+        if (perfume.fragrantica && perfume.fragrantica.trim() !== "") {
+
+            linkFragrantica.href = perfume.fragrantica;
+            linkFragrantica.textContent = "Ver no Fragrantica";
+            linkFragrantica.target = "_blank";
+            linkFragrantica.rel = "noopener noreferrer";
+            linkFragrantica.classList.add("link-fragrantica");
+
+        } else {
+
+            linkFragrantica.textContent = "Sem link do Fragrantica";
+
+        }
+
+        // Botão excluir
         const botaoExcluir = document.createElement("button");
         botaoExcluir.textContent = "Excluir";
         botaoExcluir.classList.add("btn-excluir");
@@ -127,10 +149,12 @@ function mostrarPerfumes(filtro = "") {
             excluirPerfume(perfume.id);
         });
 
+        // Adicionar elementos ao cartão
         card.appendChild(imagem);
         card.appendChild(titulo);
         card.appendChild(marca);
         card.appendChild(preco);
+        card.appendChild(linkFragrantica);
         card.appendChild(botaoExcluir);
 
         listaPerfumes.appendChild(card);
