@@ -37,7 +37,7 @@ formulario.addEventListener("submit", function(event) {
     const volume = document.getElementById("volume").value;
     const preco = document.getElementById("preco").value;
     const descricao = document.getElementById("descricao").value;
-    const fragrantica = document.getElementById("fragrantica").value;
+    const fragrantica = document.getElementById("fragrantica").value.trim();
     const arquivo = document.getElementById("imagem").files[0];
 
     if (!arquivo) {
@@ -98,7 +98,7 @@ function mostrarPerfumes(filtro = "") {
         const card = document.createElement("div");
         card.classList.add("card-perfume");
 
-        // Imagem
+        // IMAGEM
         const imagem = document.createElement("img");
         imagem.src = perfume.imagem;
         imagem.alt = perfume.nome;
@@ -108,22 +108,23 @@ function mostrarPerfumes(filtro = "") {
             copiarDivulgacao(perfume);
         });
 
-        // Nome
+        // NOME
         const titulo = document.createElement("h3");
         titulo.textContent = perfume.nome;
 
-        // Marca
+        // MARCA
         const marca = document.createElement("p");
         marca.textContent = perfume.marca;
 
-        // Preço
+        // PREÇO
         const preco = document.createElement("p");
+
         preco.textContent = perfume.preco.toLocaleString("pt-BR", {
             style: "currency",
             currency: "BRL"
         });
 
-        // Link do Fragrantica
+        // FRAGRANTICA
         const linkFragrantica = document.createElement("a");
 
         if (perfume.fragrantica && perfume.fragrantica.trim() !== "") {
@@ -140,7 +141,7 @@ function mostrarPerfumes(filtro = "") {
 
         }
 
-        // Botão excluir
+        // EXCLUIR
         const botaoExcluir = document.createElement("button");
         botaoExcluir.textContent = "Excluir";
         botaoExcluir.classList.add("btn-excluir");
@@ -149,7 +150,7 @@ function mostrarPerfumes(filtro = "") {
             excluirPerfume(perfume.id);
         });
 
-        // Adicionar elementos ao cartão
+        // ADICIONAR AO CARTÃO
         card.appendChild(imagem);
         card.appendChild(titulo);
         card.appendChild(marca);
@@ -170,16 +171,20 @@ function mostrarPerfumes(filtro = "") {
 
 function gerarDivulgacao(perfume, linkAmazon) {
 
-    const preco = perfume.preco.toLocaleString("pt-BR", {
+    const preco = Number(perfume.preco).toLocaleString("pt-BR", {
         minimumFractionDigits: 0,
         maximumFractionDigits: 2
     });
+
+    const linkFragrantica = perfume.fragrantica
+        ? `🔎 Fragrantica: ${perfume.fragrantica}`
+        : "";
 
     return `*${perfume.nome} (${perfume.volume}ml)*
 
 -${perfume.descricao}
 
-🔎 Fragrantica: ${perfume.fragrantica || "Não informado"}
+${linkFragrantica}
 
 📎${linkAmazon}
 💰R$${preco}!!!!!!!`;
