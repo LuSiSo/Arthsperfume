@@ -179,6 +179,8 @@ function gerarDivulgacao(perfume, linkAmazon) {
 
 -${perfume.descricao}
 
+🔎 Fragrantica: ${perfume.fragrantica || "Não informado"}
+
 📎${linkAmazon}
 💰R$${preco}!!!!!!!`;
 
