@@ -1,0 +1,194 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Catálogo de Perfumes</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- CABEÇALHO -->
+    <header>
+
+        <h1>Perfumaria</h1>
+
+        <button id="btn-admin">
+            Área administrativa
+        </button>
+
+    </header>
+
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main>
+
+        <!-- CATÁLOGO -->
+        <section id="catalogo">
+
+            <h2>Nosso catálogo</h2>
+
+            <input
+                type="search"
+                id="pesquisa"
+                placeholder="Pesquisar perfume..."
+            >
+
+            <!-- Perfumes adicionados pelo JavaScript -->
+            <div id="lista-perfumes">
+
+            </div>
+
+        </section>
+
+
+        <!-- ÁREA ADMINISTRATIVA -->
+        <section id="administracao">
+
+            <h2>Cadastrar perfume</h2>
+
+            <form id="form-perfume">
+
+                <!-- NOME -->
+                <div class="campo">
+
+                    <label for="nome">
+                        Nome do perfume:
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nome"
+                        placeholder="Ex: Dior Sauvage"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- MARCA -->
+                <div class="campo">
+
+                    <label for="marca">
+                        Marca:
+                    </label>
+
+                    <input
+                        type="text"
+                        id="marca"
+                        placeholder="Ex: Dior"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- VOLUME -->
+                <div class="campo">
+
+                    <label for="volume">
+                        Volume (ml):
+                    </label>
+
+                    <input
+                        type="number"
+                        id="volume"
+                        placeholder="Ex: 75"
+                        min="1"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- PREÇO -->
+                <div class="campo">
+
+                    <label for="preco">
+                        Preço:
+                    </label>
+
+                    <input
+                        type="number"
+                        id="preco"
+                        placeholder="Ex: 143"
+                        step="0.01"
+                        min="0"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- FOTOGRAFIA -->
+                <div class="campo">
+
+                    <label for="imagem">
+                        Fotografia:
+                    </label>
+
+                    <input
+                        type="file"
+                        id="imagem"
+                        accept="image/*"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- DESCRIÇÃO -->
+                <div class="campo">
+
+                    <label for="descricao">
+                        Descrição:
+                    </label>
+
+                    <textarea
+                        id="descricao"
+                        placeholder="Descrição do perfume..."
+                        required
+                    ></textarea>
+
+                </div>
+
+
+                <!-- FRAGRANTICA -->
+                <div class="campo">
+
+                    <label for="fragrantica">
+                        Link da Fragrantica:
+                    </label>
+
+                    <input
+                        type="url"
+                        id="fragrantica"
+                        placeholder="https://..."
+                    >
+
+                </div>
+
+
+                <!-- BOTÃO CADASTRAR -->
+                <button type="submit">
+                    Salvar perfume
+                </button>
+
+            </form>
+
+        </section>
+
+    </main>
+
+
+    <!-- JAVASCRIPT -->
+    <script src="script.js"></script>
+
+</body>
+
+</html>
